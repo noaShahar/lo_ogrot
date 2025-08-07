@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to the Group</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    #qr {
+      display: none;
+      margin-top: 20px;
+    }
+    #error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Welcome! Those are the rules:</h2>
+  <ol>
+    <li>No spam</li>
+  </ol>
+
+  <form id="quizForm">
+    <label>
+      <input type="checkbox" id="ruleCheck" />
+      I have read the rule
+    </label>
+    <br/><br/>
+    <label for="ruleAnswer">What is the first rule?</label><br/>
+    <input type="text" id="ruleAnswer" /><br/><br/>
+
+    <button type="submit">Join Group</button>
+  </form>
+
+  <div id="error"></div>
+
+  <div id="qr">
+    <h3>Welcome! Scan this to join:</h3>
+    <img src="YOUR_QR_CODE_IMAGE_URL_HERE" alt="WhatsApp Group QR Code" width="300" />
+  </div>
+
+  <script>
+    document.getElementById("quizForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const checkbox = document.getElementById("ruleCheck").checked;
+      const answer = document.getElementById("ruleAnswer").value.trim().toLowerCase();
+      const error = document.getElementById("error");
+      const qr = document.getElementById("qr");
+
+      if (!checkbox || answer !== "no spam") {
+        error.textContent = "Please answer correctly on all questions before joining the group.";
+        qr.style.display = "none";
+      } else {
+        error.textContent = "";
+        qr.style.display = "block";
+      }
+    });
+  </script>
+
+</body>
+</html>
