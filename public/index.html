@@ -437,22 +437,16 @@
                 answer.includes(correct) || correct.includes(answer)
             );
 
-            setTimeout(async () => {
+            setTimeout(() => {
                 if (isCorrect) {
-                    try {
-                        // Fetch the encoded link from config.json and decode it
-                        const response = await fetch('config.json');
-                        const config = await response.json();
-                        const inviteLink = atob(config.encodedLink);
+                    // Success! Decode and show the invite link
+                    const encodedLink = 'aHR0cHM6Ly9jaGF0LndoYXRzYXBwLmNvbS9ZT1VSX0FOVEFMX1dIQVRTQVBQX0xJTktfSEVSRQ==';
+                    const inviteLink = atob(encodedLink);
 
-                        errorMessage.style.display = 'none';
-                        document.getElementById('inviteLink').href = inviteLink;
-                        successSection.classList.add('show');
-                        questionSection.style.display = 'none';
-                    } catch (error) {
-                        console.error('Error loading config:', error);
-                        showError('שגיאה בטעינת הקישור. אנא נסו שוב.');
-                    }
+                    errorMessage.style.display = 'none';
+                    document.getElementById('inviteLink').href = inviteLink;
+                    successSection.classList.add('show');
+                    questionSection.style.display = 'none';
                 } else {
                     showError('תשובה שגויה. אנא קראו שוב את הכללים');
                 }
