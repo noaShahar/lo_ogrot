@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome - אמהות לא אוגרות הרצליה</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Welcome - אמהות לא אוגרות הרצליה v1.5</title>
     <style>
         * {
             margin: 0;
@@ -454,13 +457,18 @@
 
             setTimeout(async () => {
                 if (isCorrect) {
-                    // Decode the WhatsApp link from the constant above
-                    const inviteLink = atob(ENCODED_WHATSAPP_LINK);
-
-                    errorMessage.style.display = 'none';
-                    document.getElementById('inviteLink').href = inviteLink;
-                    successSection.classList.add('show');
-                    questionSection.style.display = 'none';
+                    try {
+                        // Decode the WhatsApp link from the constant above
+                        const inviteLink = atob(ENCODED_WHATSAPP_LINK);
+                        
+                        errorMessage.style.display = 'none';
+                        document.getElementById('inviteLink').href = inviteLink;
+                        successSection.classList.add('show');
+                        questionSection.style.display = 'none';
+                    } catch (error) {
+                        console.error('Error decoding link:', error);
+                        showError('שגיאה בטעינת הקישור. אנא נסו שוב מאוחר יותר.');
+                    }
                 } else {
                     showError('תשובה שגויה. אנא קראו שוב את הכללים');
                 }
